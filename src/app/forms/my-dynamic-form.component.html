@@ -1,0 +1,44 @@
+<div class="container-fluid">
+
+  <form connect="testForm" [formGroup]="formGroup" class="form-horizontal">
+
+    <dynamic-form-ng-bootstrap-control *ngFor="let controlModel of formModel"
+                                       [group]="formGroup"
+                                       [model]="controlModel"
+                                       (blur)="onBlur($event)"
+                                       (change)="onChange($event)"
+                                       (focus)="onFocus($event)">
+
+      <ng-template modelId="bootstrapFormArray" let-context="context" let-index="index">
+
+        <div class="col-sm-4">
+
+          <button type="button" class="btn btn-danger btn-sm rounded" (click)="remove(context, index)">&#10005;</button>
+          <button type="button" class="btn btn-default btn-sm rounded" (click)="move(context, index, -1)">&#9650;</button>
+          <button type="button" class="btn btn-default btn-sm rounded" (click)="move(context, index, 1)">&#9660;</button>
+          <button type="button" class="btn btn-success btn-sm rounded" (click)="insert(context, index + 1)">&#43;</button>
+
+        </div>
+
+      </ng-template>
+
+    </dynamic-form-ng-bootstrap-control>
+
+  </form>
+
+  <pre>{{formGroup.value | json}}</pre>
+
+  <form connect="testForm2" class="form-horizontal" [formGroup]="formGroup2">
+
+    <dynamic-form-ng-bootstrap-control *ngFor="let controlModel of formModel2"
+                                       [hasErrorMessaging]="true"
+                                       [group]="formGroup2"
+                                       [model]="controlModel"></dynamic-form-ng-bootstrap-control>
+
+  </form>
+
+  <!--button (click)="test()" type="button">Test</button-->
+
+  <pre>{{formGroup2.value | json}}</pre>
+
+</div>

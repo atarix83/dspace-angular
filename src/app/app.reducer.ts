@@ -11,18 +11,23 @@ import { StoreActionTypes } from './store.actions';
 
 import { ENV_CONFIG } from '../config';
 
+import { defaultFormReducer } from './forms/store/form-reducer';
+import { FormState } from './forms/store/state';
+
 export interface AppState {
   core: CoreState;
   router: RouterState;
   hostWindow: HostWindowState;
   header: HeaderState;
+  forms: FormState;
 }
 
 export const reducers = {
   core: coreReducer,
   router: routerReducer,
   hostWindow: hostWindowReducer,
-  header: headerReducer
+  header: headerReducer,
+  forms: defaultFormReducer
 };
 
 export function rootReducer(state: any, action: any) {

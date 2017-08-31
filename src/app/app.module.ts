@@ -26,6 +26,7 @@ import { HeaderComponent } from './header/header.component';
 import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
 
 import { GLOBAL_CONFIG, ENV_CONFIG } from '../config';
+import { MyDynamicFormModule } from './forms/my-dynamic-form.module';
 
 export function getConfig() {
   return ENV_CONFIG;
@@ -42,6 +43,7 @@ export function getConfig() {
     ItemPageModule,
     CollectionPageModule,
     CommunityPageModule,
+    MyDynamicFormModule,
     AppRoutingModule,
     StoreModule.provideStore(rootReducer),
     RouterStoreModule.connectRouter(),
