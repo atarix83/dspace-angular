@@ -103,7 +103,7 @@ export class RequestService {
   }
 
   private dispatchRequest(request: RestRequest) {
-    this.store.dispatch(new ResponseCacheRemoveAction(request.href));
+    // this.store.dispatch(new ResponseCacheRemoveAction(request.href));
     this.store.dispatch(new RequestConfigureAction(request));
     this.store.dispatch(new RequestExecuteAction(request.uuid));
     if (request.method === RestRequestMethod.Get) {
