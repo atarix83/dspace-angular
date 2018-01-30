@@ -10,6 +10,7 @@ import { ConfigResponseParsingService } from './config-response-parsing.service'
 import { SubmissionResponseParsingService } from '../submission/submission-response-parsing.service';
 import { EpersonResponseParsingService } from '../eperson/eperson-response-parsing.service';
 import { IntegrationResponseParsingService } from '../integration/integration-response-parsing.service';
+import { WSIResponseParsingService } from '../submission/wsi-response-parsing.service';
 
 /* tslint:disable:max-classes-per-file */
 
@@ -180,7 +181,7 @@ export class SubmissionFindAllRequest extends GetRequest {
   }
 
   getResponseParser(): GenericConstructor<ResponseParsingService> {
-    return SubmissionResponseParsingService;
+    return WSIResponseParsingService;
   }
 }
 
@@ -194,7 +195,7 @@ export class SubmissionFindByIDRequest extends GetRequest {
   }
 
   getResponseParser(): GenericConstructor<ResponseParsingService> {
-    return SubmissionResponseParsingService;
+    return WSIResponseParsingService;
   }
 }
 

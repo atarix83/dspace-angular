@@ -51,6 +51,7 @@ import { WorkspaceitemDataService } from './submission/workspaceitem-data.servic
 import { UUIDService } from './shared/uuid.service';
 import { JsonPatchOperationsService } from './json-patch/json-patch-operations.service';
 import { PostPatchDataService } from './data/postpatch-data.service';
+import { WSIResponseParsingService } from './submission/wsi-response-parsing.service';
 
 const IMPORTS = [
   CommonModule,
@@ -102,6 +103,7 @@ const PROVIDERS = [
   IntegrationResponseParsingService,
   UUIDService,
   WorkspaceitemDataService,
+  WSIResponseParsingService,
   { provide: NativeWindowService, useFactory: NativeWindowFactory }
 ];
 

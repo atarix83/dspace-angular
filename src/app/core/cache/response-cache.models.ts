@@ -79,12 +79,14 @@ export class PostPatchSuccessResponse extends RestResponse {
 }
 
 export class SubmissionSuccessResponse extends RestResponse {
+  public resourceSelfLinks: string[];
   constructor(
     public dataDefinition: Array<NormalizedObject|ConfigObject|string>,
     public statusCode: string,
     public pageInfo?: PageInfo
   ) {
     super(true, statusCode);
+    this.resourceSelfLinks = dataDefinition as string[];
   }
 }
 

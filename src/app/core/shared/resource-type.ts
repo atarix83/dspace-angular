@@ -12,4 +12,8 @@ export enum ResourceType {
   ResourcePolicy = 'resourcePolicy',
   License = 'license',
   Workspaceitem = 'workspaceitem',
+  SubmissionDefinitions = 'submissiondefinitions',
+  SubmissionDefinition = 'submissiondefinition',
+  Eperson = 'eperson',
+  Epersons = 'epersons',
 }

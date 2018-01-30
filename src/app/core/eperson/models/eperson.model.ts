@@ -1,30 +1,25 @@
 import { autoserialize } from 'cerialize';
+import { CacheableObject } from '../../cache/object-cache.reducer';
+import { ListableObject } from '../../../shared/object-collection/shared/listable-object.model';
+import { NormalizedDSpaceObject } from '../../cache/models/normalized-dspace-object.model';
+import { DSpaceObject } from '../../shared/dspace-object.model';
 
-export abstract class EpersonModel {
+export class EpersonModel extends DSpaceObject implements CacheableObject, ListableObject {
 
-  @autoserialize
-  public id: string;
-
-  @autoserialize
-  public uuid: string;
-
-  @autoserialize
-  public name: string;
-
-  @autoserialize
   public handle: string;
 
-  @autoserialize
-  public metadata: any;
-
-  @autoserialize
   public groups: any;
 
-  @autoserialize
-  public type: string;
+  public netid: string;
 
-  @autoserialize
-  public _links: {
-    [name: string]: string
-  }
+  public lastActive: string;
+
+  public canLogIn: boolean;
+
+  public email: string;
+
+  public requireCertificate: boolean;
+
+  public selfRegistered: boolean;
+
 }

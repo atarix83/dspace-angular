@@ -38,11 +38,17 @@ export class NormalizedWorkspaceItem extends NormalizedSubmissionObject {
   @autoserialize
   sections: WorkspaceitemSectionsObject;
 
-  @autoserializeAs(SubmissionDefinitionsModel)
-  submissionDefinition: SubmissionDefinitionsModel;
+  /*@autoserializeAs(SubmissionDefinitionsModel)
+  submissionDefinition: SubmissionDefinitionsModel;*/
+  @autoserialize
+  @relationship(ResourceType.SubmissionDefinition, true)
+  submissionDefinition: string[];
 
-  @autoserializeAs(EpersonModel)
-  submitter: EpersonModel;
+  /*@autoserializeAs(EpersonModel)
+  submitter: EpersonModel;*/
+  @autoserialize
+  @relationship(ResourceType.Eperson, true)
+  submitter: string[];
 
   @autoserialize
   errors: WorkspaceItemError[]

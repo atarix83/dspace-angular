@@ -36,7 +36,7 @@ export class WorkspaceitemDataService extends DataService<NormalizedWorkspaceIte
   public getScopedEndpoint(scopeID: string): Observable<string> {
     return this.getEndpoint();
   }
-/*
+
   findAll(options: FindAllOptions = {}): Observable<RemoteData<PaginatedList<Workspaceitem>>> {
     const hrefObs = this.getEndpoint().filter((href: string) => isNotEmpty(href))
       .flatMap((endpoint: string) => this.getFindAllHref(endpoint, options));
@@ -70,5 +70,5 @@ export class WorkspaceitemDataService extends DataService<NormalizedWorkspaceIte
   findByHref(href: string): Observable<RemoteData<Workspaceitem>> {
     this.requestService.configure(new SubmissionRequest(this.requestService.generateRequestId(), href));
     return this.rdbService.buildSingle<NormalizedWorkspaceItem, Workspaceitem>(href, this.normalizedResourceType);
-  }*/
+  }
 }

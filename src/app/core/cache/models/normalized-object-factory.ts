@@ -10,9 +10,13 @@ import { NormalizedBitstreamFormat } from './normalized-bitstream-format.model';
 import { NormalizedLicense } from './normalized-license.model';
 import { NormalizedResourcePolicy } from './normalized-resource-policy.model';
 import { NormalizedWorkspaceItem } from '../../submission/models/normalized-workspaceitem.model';
+import { SubmissionDefinitionsModel } from '../../shared/config/config-submission-definitions.model';
+import { EpersonModel } from '../../eperson/models/eperson.model';
+import { EpersonsModel } from '../../eperson/models/epersons.model';
+import { NormalizedEpersonModel } from '../../eperson/models/NormalizedEperson.model';
 
 export class NormalizedObjectFactory {
-  public static getConstructor(type: ResourceType): GenericConstructor<NormalizedObject> {
+  public static getConstructor(type: ResourceType): GenericConstructor<any> {
     switch (type) {
       case ResourceType.Bitstream: {
         return NormalizedBitstream
@@ -40,6 +44,12 @@ export class NormalizedObjectFactory {
       }
       case ResourceType.Workspaceitem: {
         return NormalizedWorkspaceItem
+      }
+      case ResourceType.SubmissionDefinition: {
+        return SubmissionDefinitionsModel
+      }
+      case ResourceType.Eperson: {
+        return NormalizedEpersonModel
       }
       default: {
         return undefined;
