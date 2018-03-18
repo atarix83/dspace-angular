@@ -14,9 +14,10 @@ import { AppComponent } from '../../app/app.component';
 import { AppModule } from '../../app/app.module';
 import { DSpaceBrowserTransferStateModule } from '../transfer-state/dspace-browser-transfer-state.module';
 import { DSpaceTransferState } from '../transfer-state/dspace-transfer-state.service';
+import { ASSETS_PATH } from '../../config';
 
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, `${ASSETS_PATH}/i18n/`, '.json');
 }
 
 @NgModule({

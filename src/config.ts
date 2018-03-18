@@ -17,6 +17,8 @@ let envConfigOverride: GlobalConfig;
 
 let envConfigFile: string;
 
+let ASSETS_PATH: string;
+
 // check process.env.NODE_ENV to determine which environment config to use
 // process.env.NODE_ENV is defined by webpack, else assume development
 switch (process.env.NODE_ENV) {
@@ -57,6 +59,8 @@ if (envConfigFile) {
 
 buildBaseUrls();
 
+buildAssetsPath();
+
 // set config for whether running in production
 ENV_CONFIG.production = production;
 
@@ -91,6 +95,15 @@ function buildBaseUrls(): void {
   }
 }
 
+function buildAssetsPath(): void {
+  const namespace = ENV_CONFIG.ui.nameSpace === '/' ? '' :
+    ENV_CONFIG.ui.nameSpace.startsWith('/') ?
+      ENV_CONFIG.ui.nameSpace + '/' :
+      '/' + ENV_CONFIG.ui.nameSpace + '/';
+
+  ASSETS_PATH = namespace + 'assets';
+}
+
 function getProtocol(ssl: boolean): string {
   return ssl ? 'https://' : 'http://';
 }
@@ -115,4 +128,4 @@ function isObject(item: any): boolean {
   return item && typeof item === 'object' && !Array.isArray(item);
 }
 
-export { GlobalConfig, GLOBAL_CONFIG, ENV_CONFIG }
+export { GlobalConfig, GLOBAL_CONFIG, ENV_CONFIG, ASSETS_PATH }

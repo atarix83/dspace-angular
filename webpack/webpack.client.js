@@ -8,7 +8,8 @@ const {
 module.exports = {
   entry: root('./src/main.browser.ts'),
   output: {
-    filename: 'client.js'
+    filename: 'client.js',
+    publicPath: '/di',
   },
   target: 'web',
   plugins: [

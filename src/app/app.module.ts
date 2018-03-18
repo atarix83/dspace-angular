@@ -14,7 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { storeFreeze } from 'ngrx-store-freeze';
 
-import { ENV_CONFIG, GLOBAL_CONFIG, GlobalConfig } from '../config';
+import { ASSETS_PATH, ENV_CONFIG, GLOBAL_CONFIG, GlobalConfig } from '../config';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -36,6 +36,10 @@ export function getConfig() {
 
 export function getBase() {
   return ENV_CONFIG.ui.nameSpace;
+}
+
+export function getAssetsPath() {
+  return ASSETS_PATH;
 }
 
 export function getMetaReducers(config: GlobalConfig): Array<MetaReducer<AppState>> {
@@ -75,6 +79,10 @@ if (!ENV_CONFIG.production) {
       provide: META_REDUCERS,
       useFactory: getMetaReducers,
       deps: [GLOBAL_CONFIG]
+    },
+    {
+      provide: ASSETS_PATH,
+      useFactory: (getAssetsPath)
     },
     {
       provide: RouterStateSerializer,
