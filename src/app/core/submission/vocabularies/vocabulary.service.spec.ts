@@ -13,7 +13,7 @@ import { VocabularyEntriesRequest } from '../../data/request.models';
 import { RequestParam } from '../../cache/models/request-param.model';
 import { PageInfo } from '../../shared/page-info.model';
 import { PaginatedList } from '../../data/paginated-list';
-import { createSuccessfulRemoteDataObject } from '../../../shared/remote-data.utils';
+import { createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
 import { RequestEntry } from '../../data/request.reducer';
 import { RestResponse } from '../../cache/response.models';
 import { VocabularyService } from './vocabulary.service';
@@ -65,6 +65,27 @@ describe('VocabularyService', () => {
         href: 'https://rest.api/rest/api/submission/vocabularies/types/entries'
       },
     }
+  };
+
+  const vocabularyEntry: any = {
+    display: 'testValue1',
+    value: 'testValue1',
+    otherInformation: {},
+    type: 'vocabularyEntry'
+  };
+
+  const vocabularyEntry2: any = {
+    display: 'testValue2',
+    value: 'testValue2',
+    otherInformation: {},
+    type: 'vocabularyEntry'
+  };
+
+  const vocabularyEntry3: any = {
+    display: 'testValue3',
+    value: 'testValue3',
+    otherInformation: {},
+    type: 'vocabularyEntry'
   };
 
   const vocabularyEntryParentDetail: any = {
@@ -160,10 +181,13 @@ describe('VocabularyService', () => {
   }
   const pageInfo = new PageInfo();
   const array = [vocabulary, hierarchicalVocabulary];
+  const arrayEntries = [vocabularyEntry, vocabularyEntry2, vocabularyEntry3];
   const childrenEntries = [vocabularyEntryChildDetail, vocabularyEntryChild2Detail];
   const paginatedList = new PaginatedList(pageInfo, array);
+  const paginatedListEntries = new PaginatedList(pageInfo, arrayEntries);
   const childrenPaginatedList = new PaginatedList(pageInfo, childrenEntries);
   const vocabularyRD = createSuccessfulRemoteDataObject(vocabulary);
+  const vocabularyEntriesRD = createSuccessfulRemoteDataObject$(paginatedListEntries);
   const vocabularyEntryDetailParentRD = createSuccessfulRemoteDataObject(vocabularyEntryParentDetail);
   const vocabularyEntryChildrenRD = createSuccessfulRemoteDataObject(childrenPaginatedList);
   const paginatedListRD = createSuccessfulRemoteDataObject(paginatedList);
@@ -313,7 +337,7 @@ describe('VocabularyService', () => {
 
       beforeEach(() => {
         requestService = getMockRequestService(getRequestEntry$(true));
-        rdbService = getMockRemoteDataBuildService();
+        rdbService = getMockRemoteDataBuildService(undefined, vocabularyEntriesRD);
         spyOn(rdbService, 'toRemoteDataObservable').and.callThrough();
         service = initTestService();
       });
