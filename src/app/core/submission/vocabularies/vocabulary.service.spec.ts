@@ -353,7 +353,8 @@ describe('VocabularyService', () => {
         });
 
         it('should call RemoteDataBuildService to create the RemoteData Observable', () => {
-          service.getVocabularyEntries(vocabularyOptions, pageInfo);
+          scheduler.schedule(() => service.getVocabularyEntries(vocabularyOptions, pageInfo).subscribe());
+          scheduler.flush();
 
           expect(rdbService.toRemoteDataObservable).toHaveBeenCalled();
 
@@ -371,7 +372,8 @@ describe('VocabularyService', () => {
         });
 
         it('should call RemoteDataBuildService to create the RemoteData Observable', () => {
-          service.getVocabularyEntriesByValue('test', false, vocabularyOptions, pageInfo);
+          scheduler.schedule(() => service.getVocabularyEntriesByValue('test', false, vocabularyOptions, pageInfo).subscribe());
+          scheduler.flush();
 
           expect(rdbService.toRemoteDataObservable).toHaveBeenCalled();
 
@@ -389,7 +391,8 @@ describe('VocabularyService', () => {
         });
 
         it('should call RemoteDataBuildService to create the RemoteData Observable', () => {
-          service.getVocabularyEntryByValue('test', vocabularyOptions);
+          scheduler.schedule(() => service.getVocabularyEntryByValue('test', vocabularyOptions).subscribe());
+          scheduler.flush();
 
           expect(rdbService.toRemoteDataObservable).toHaveBeenCalled();
 
@@ -407,7 +410,8 @@ describe('VocabularyService', () => {
         });
 
         it('should call RemoteDataBuildService to create the RemoteData Observable', () => {
-          service.getVocabularyEntryByID('test', vocabularyOptions);
+          scheduler.schedule(() => service.getVocabularyEntryByID('test', vocabularyOptions));
+          scheduler.flush();
 
           expect(rdbService.toRemoteDataObservable).toHaveBeenCalled();
 
