@@ -113,7 +113,7 @@ describe('DsDynamicOneboxComponent test suite', () => {
   }
 
   // async beforeEach
-  beforeEach(async(() => {
+  beforeEach(() => {
     vocabularyServiceStub = new VocabularyServiceStub();
     // modal = jasmine.createSpyObj('modal', ['open', 'close', 'dismiss']);
     modal = jasmine.createSpyObj('modal',
@@ -150,9 +150,9 @@ describe('DsDynamicOneboxComponent test suite', () => {
         { provide: NgbModal, useValue: modal }
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
-    });
+    }).compileComponents();
 
-  }));
+  });
 
   describe('', () => {
     // synchronous beforeEach
