@@ -191,9 +191,9 @@ describe('VocabularyService', () => {
   const vocabularyEntryDetailParentRD = createSuccessfulRemoteDataObject(vocabularyEntryParentDetail);
   const vocabularyEntryChildrenRD = createSuccessfulRemoteDataObject(childrenPaginatedList);
   const paginatedListRD = createSuccessfulRemoteDataObject(paginatedList);
-  const getRequestEntry$ = (successful: boolean) => {
+  const getRequestEntries$ = (successful: boolean) => {
     return observableOf({
-      response: { isSuccessful: successful, payload: vocabulary } as any
+      response: { isSuccessful: successful, payload: arrayEntries } as any
     } as RequestEntry)
   };
   objectCache = {} as ObjectCacheService;
@@ -336,7 +336,7 @@ describe('VocabularyService', () => {
     describe('', () => {
 
       beforeEach(() => {
-        requestService = getMockRequestService(getRequestEntry$(true));
+        requestService = getMockRequestService(getRequestEntries$(true));
         rdbService = getMockRemoteDataBuildService(undefined, vocabularyEntriesRD);
         spyOn(rdbService, 'toRemoteDataObservable').and.callThrough();
         service = initTestService();
@@ -353,11 +353,10 @@ describe('VocabularyService', () => {
         });
 
         it('should call RemoteDataBuildService to create the RemoteData Observable', () => {
-          scheduler.schedule(() => service.getVocabularyEntries(vocabularyOptions, pageInfo).subscribe());
+          scheduler.schedule(() => service.getVocabularyEntries(vocabularyOptions, pageInfo));
           scheduler.flush();
 
           expect(rdbService.toRemoteDataObservable).toHaveBeenCalled();
-
         });
       });
 
@@ -372,7 +371,7 @@ describe('VocabularyService', () => {
         });
 
         it('should call RemoteDataBuildService to create the RemoteData Observable', () => {
-          scheduler.schedule(() => service.getVocabularyEntriesByValue('test', false, vocabularyOptions, pageInfo).subscribe());
+          scheduler.schedule(() => service.getVocabularyEntriesByValue('test', false, vocabularyOptions, pageInfo));
           scheduler.flush();
 
           expect(rdbService.toRemoteDataObservable).toHaveBeenCalled();
@@ -391,7 +390,7 @@ describe('VocabularyService', () => {
         });
 
         it('should call RemoteDataBuildService to create the RemoteData Observable', () => {
-          scheduler.schedule(() => service.getVocabularyEntryByValue('test', vocabularyOptions).subscribe());
+          scheduler.schedule(() => service.getVocabularyEntryByValue('test', vocabularyOptions));
           scheduler.flush();
 
           expect(rdbService.toRemoteDataObservable).toHaveBeenCalled();
