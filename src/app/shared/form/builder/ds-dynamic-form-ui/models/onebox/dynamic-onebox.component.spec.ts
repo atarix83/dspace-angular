@@ -1,7 +1,7 @@
 // Load the implementations that should be tested
 import { ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { async, ComponentFixture, fakeAsync, inject, TestBed, tick, } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick, } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CdkTreeModule } from '@angular/cdk/tree';
 
@@ -395,9 +395,10 @@ describe('DsDynamicOneboxComponent test suite', () => {
         oneboxComponent = null;
       });
 
-      it('should init component properly', () => {
+      it('should init component properly', fakeAsync(() => {
+        tick();
         expect(oneboxComponent.currentValue).not.toBeDefined();
-      });
+      }));
 
       it('should open tree properly', () => {
         scheduler.schedule(() => oneboxComponent.openTree(new Event('click')));
