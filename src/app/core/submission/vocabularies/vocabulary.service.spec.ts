@@ -169,10 +169,10 @@ describe('VocabularyService', () => {
   const collectionUUID = '8b39g7ya-5a4b-438b-851f-be1d5b4a1c5a';
   const entryID = 'dsfsfsdf-5a4b-438b-851f-be1d5b4a1c5a';
   const searchRequestURL = `https://rest.api/rest/api/submission/vocabularies/search/byMetadataAndCollection?metadata=${metadata}&collection=${collectionUUID}`;
-  const entriesRequestURL = `https://rest.api/rest/api/submission/vocabularies/${vocabulary.id}/entries?metadata=${metadata}&collection=${collectionUUID}`;
-  const entriesByValueRequestURL = `https://rest.api/rest/api/submission/vocabularies/${vocabulary.id}/entries?metadata=${metadata}&collection=${collectionUUID}&filter=test&exact=false`;
-  const entryByValueRequestURL = `https://rest.api/rest/api/submission/vocabularies/${vocabulary.id}/entries?metadata=${metadata}&collection=${collectionUUID}&filter=test&exact=true`;
-  const entryByIDRequestURL = `https://rest.api/rest/api/submission/vocabularies/${vocabulary.id}/entries?metadata=${metadata}&collection=${collectionUUID}&entryID=${entryID}`;
+  const entriesRequestURL = `https://rest.api/rest/api/submission/vocabularies/${vocabulary.id}/entries`;
+  const entriesByValueRequestURL = `https://rest.api/rest/api/submission/vocabularies/${vocabulary.id}/entries?filter=test&exact=false`;
+  const entryByValueRequestURL = `https://rest.api/rest/api/submission/vocabularies/${vocabulary.id}/entries?filter=test&exact=true`;
+  const entryByIDRequestURL = `https://rest.api/rest/api/submission/vocabularies/${vocabulary.id}/entries?entryID=${entryID}`;
   const vocabularyOptions: VocabularyOptions = {
     name: vocabularyId,
     metadata: metadata,
@@ -522,8 +522,6 @@ describe('VocabularyService', () => {
           null,
           null,
           null,
-          null,
-          null,
           pageInfo.elementsPerPage,
           pageInfo.currentPage
         );
@@ -545,8 +543,6 @@ describe('VocabularyService', () => {
     describe('searchByTop', () => {
       it('should proxy the call to vocabularyEntryDetailDataService.searchBy', () => {
         const options: VocabularyFindOptions = new VocabularyFindOptions(
-          null,
-          null,
           null,
           null,
           null,
