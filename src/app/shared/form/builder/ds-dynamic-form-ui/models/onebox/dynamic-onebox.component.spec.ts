@@ -115,10 +115,10 @@ describe('DsDynamicOneboxComponent test suite', () => {
   // async beforeEach
   beforeEach(() => {
     vocabularyServiceStub = new VocabularyServiceStub();
-    // modal = jasmine.createSpyObj('modal', ['open', 'close', 'dismiss']);
+
     modal = jasmine.createSpyObj('modal',
       {
-        open: jasmine.createSpy('open').and.returnValue(new MockNgbModalRef()),
+        open: jasmine.createSpy('open'),
         close: jasmine.createSpy('close'),
         dismiss: jasmine.createSpy('dismiss'),
       }
@@ -381,6 +381,7 @@ describe('DsDynamicOneboxComponent test suite', () => {
       oneboxCompFixture = TestBed.createComponent(DsDynamicOneboxComponent);
       oneboxComponent = oneboxCompFixture.componentInstance; // FormComponent test instance
       modalService = TestBed.get(NgbModal);
+      modalService.open.and.returnValue(new MockNgbModalRef());
     });
 
     describe('when init model value is empty', () => {
@@ -400,15 +401,17 @@ describe('DsDynamicOneboxComponent test suite', () => {
         expect(oneboxComponent.currentValue).not.toBeDefined();
       }));
 
-      it('should open tree properly', () => {
+      it('should open tree properly', (done) => {
         scheduler.schedule(() => oneboxComponent.openTree(new Event('click')));
         scheduler.flush();
 
         expect((oneboxComponent as any).modalService.open).toHaveBeenCalled();
+        done();
       });
     });
 
     describe('when init model value is not empty', () => {
+
       beforeEach(() => {
         oneboxComponent.group = ONEBOX_TEST_GROUP;
         oneboxComponent.model = new DynamicOneboxModel(ONEBOX_TEST_MODEL_CONFIG);
@@ -421,6 +424,8 @@ describe('DsDynamicOneboxComponent test suite', () => {
         spyOn((oneboxComponent as any).vocabularyService, 'getVocabularyEntryByID').and.returnValue(entry);
         (oneboxComponent.model as any).value = new FormFieldMetadataValueObject('test', null, null, 'testDisplay');
         oneboxCompFixture.detectChanges();
+        // modalService = (oneboxComponent as  any).modalService;
+        // modalService.open.and.returnValue(new MockNgbModalRef());
       });
 
       afterEach(() => {
@@ -434,11 +439,12 @@ describe('DsDynamicOneboxComponent test suite', () => {
         expect((oneboxComponent as any).vocabularyService.getVocabularyEntryByValue).toHaveBeenCalled();
       }));
 
-      it('should open tree properly', () => {
+      it('should open tree properly', (done) => {
         scheduler.schedule(() => oneboxComponent.openTree(new Event('click')));
         scheduler.flush();
 
         expect((oneboxComponent as any).modalService.open).toHaveBeenCalled();
+        done();
       });
     });
 
