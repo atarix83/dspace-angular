@@ -525,7 +525,7 @@ describe('AuthEffects', () => {
   });
 
   describe('refreshTokenAndRedirectSuccess$', () => {
-    it('should replace token and redirect in response to a REFRESH_TOKEN_AND_REDIRECT_SUCCESS action', () => {
+    it('should replace token and redirect in response to a REFRESH_TOKEN_AND_REDIRECT_SUCCESS action', (done) => {
 
       actions = hot('--a-', { a: { type: AuthActionTypes.REFRESH_TOKEN_AND_REDIRECT_SUCCESS, payload: {token, redirectUrl} } });
 
@@ -535,9 +535,8 @@ describe('AuthEffects', () => {
       authEffects.refreshTokenAndRedirectSuccess$.subscribe(() => {
         expect(authServiceStub.replaceToken).toHaveBeenCalledWith(token);
         expect(routerStub.navigateByUrl).toHaveBeenCalledWith(redirectUrl);
-        flush();
       });
-
+      done();
     });
   })
 });
